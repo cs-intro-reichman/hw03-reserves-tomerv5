@@ -12,6 +12,19 @@ public class UniqueChars {
      */
     public static String uniqueChars(String s) {
         // Replace the following statement with your code
-        return null;
+        String newStr = "" + s.charAt(0); 
+        Boolean exist = false;  //hello
+        for(int i = 1; i < s.length(); i++) {
+            for (int j = 0; j < newStr.length(); j++) {
+                if (s.charAt(i) == newStr.charAt(j)) {
+                    exist = true;
+                    break;
+                }
+                
+            }
+            if (!exist) newStr += s.charAt(i);
+                exist = false;
+        }
+        return newStr;
     }
 }
