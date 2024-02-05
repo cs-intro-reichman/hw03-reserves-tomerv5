@@ -30,9 +30,7 @@ public class LoanCalc {
 		System.out.println();
 		System.out.println("number of iterations: " + iterationCounter);
 		
-		/*System.out.println(bruteForceSolver(100000, 5, 10, 0.001));
-		System.out.println(bisectionSolver(100000, 5, 10, 0.001));*/
-
+		
 	}
 	
 	/**
@@ -64,15 +62,16 @@ public class LoanCalc {
     public static double bisectionSolver(double loan, double rate, int n, double epsilon) {  
     	// Replace the following statement with your code
 		iterationCounter = 0;
+		double L = loan / n;
 		double H = loan;
-		double L = 1.0;
 		double g = (H + L) / 2;
 		double balance = endBalance(loan, rate, n, g);
     	while (Math.abs(balance)>= epsilon) {
 			if (balance < 0) H = g;
-			else L = g;
+			else L = g; 
 			g = (H + L) / 2;
 			balance = endBalance(loan, rate, n, g);
+			if (Math.abs(balance) <= epsilon) break;
 			iterationCounter++;
 		}
 		return g;
@@ -84,9 +83,8 @@ public class LoanCalc {
 	*/
 	private static double endBalance(double loan, double rate, int n, double payment) {
 		// Replace the following statement with your code
-		double percentage = 100 + rate;
 		for (int i = 0; i < n; i++) {
-			loan = (loan - payment) * (percentage / 100);
+			loan = (loan - payment) * (1 + (rate / 100));
 		}
     	return loan;
 	}
