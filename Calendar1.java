@@ -20,13 +20,13 @@ public class Calendar1 {
 	    int debugDaysCounter = 0; 
 	    //// Write the necessary initialization code, and replace the condition
 	    //// of the while loop with the necessary condition 
-	 	while (true) {
-	 		//// Write the body of the while 		
+	 	while (year != 2000) {
+			System.out.println(dayOfMonth + "/" + month + "/" + year + (dayOfWeek % 7 == 1 ? " Sunday" : ""));
 	 		advance();
 	 		debugDaysCounter++;
 	 		//// If you want to stop the loop after n days, replace the condition of the
 	 		//// if statement with the condition (debugDaysCounter == n)
-	 		if (false) { 
+	 		if (debugDaysCounter == 1000) { 
 	 			break;
 	 		}
         }
@@ -37,12 +37,52 @@ public class Calendar1 {
 	 // If the month changes, sets the number of days in this month.
 	 // Side effects: changes the static variables dayOfMonth, month, year, dayOfWeek, nDaysInMonth.
 	 private static void advance() {
-		// Replace this comment with your code
+		nDaysInMonth = nDaysInMonth(month, year);
+		dayOfWeek++;
+
+		switch (nDaysInMonth) {
+			case 31: if (dayOfMonth == 31 && month == 12) {
+						dayOfMonth = 1;
+						month = 1;
+						year++;
+						
+					}
+					else if (dayOfMonth == 31) {
+							dayOfMonth = 1;
+							month++;
+						}
+					else dayOfMonth++;
+					break;
+
+			case 30: if (dayOfMonth == 30){
+					dayOfMonth = 1;
+					month++;
+					}
+					else dayOfMonth++;
+					break;
+
+			case 29: if (dayOfMonth == 29){
+					dayOfMonth = 1;
+					month++;
+					}
+					else dayOfMonth++;
+					break;
+				
+			case 28: if (dayOfMonth == 28){
+					dayOfMonth = 1;
+					month++;
+					}
+					else dayOfMonth++;
+					break;
+					
+			default:
+				break;
+		}
 	 } 
 		 
     // Returns true if the given year is a leap year, false otherwise.
 	private static boolean isLeapYear(int year) {
-	    // Replace the following statement with your code
+		if (year % 400 == 0 || (year % 4 == 0 && year % 100 != 0)) return true;
 		return false;
 	}
 	 
@@ -51,7 +91,22 @@ public class Calendar1 {
 	// February has 28 days in a common year, and 29 days in a leap year.
 	// All the other months have 31 days.
 	private static int nDaysInMonth(int month, int year) {
-		// Replace the following statement with your code
-		return 0;
+		int days;
+		switch (month) {
+			case 1, 3, 5, 7, 8, 10, 12: 
+				days = 31;
+				break;
+			case 2:
+				if (isLeapYear(year)) days = 29;
+				else days = 28;
+				break;
+			case 4, 6, 9, 11:
+				days = 30;
+				break;
+			default:
+				return 0;   // wrong month check
+			
+		}
+		return days;
 	}
 }
