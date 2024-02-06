@@ -48,7 +48,6 @@ public class LoanCalc {
 					iterationCounter++;
 				}
 
-
     	return g;
     }
     
@@ -80,7 +79,7 @@ public class LoanCalc {
 	/**
 	* Computes the ending balance of a loan, given the sum of the loan, the periodical
 	* interest rate (as a percentage), the number of periods (n), and the periodical payment.
-	*/
+	*/ 
 	private static double endBalance(double loan, double rate, int n, double payment) {
 		// Replace the following statement with your code
 		for (int i = 0; i < n; i++) {
